@@ -63,6 +63,7 @@
 }
 
 - (void)parseCSVDataFromString:(NSString*)csvString{
+    [self.dataCache removeAllObjects];
     NSArray *array = [csvString CSVComponents];
     
     for (NSArray *row in array) {

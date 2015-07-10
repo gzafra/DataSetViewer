@@ -14,7 +14,6 @@
 		B6F6D2261B4FD7B9006F0A9B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D2241B4FD7B9006F0A9B /* LaunchScreen.xib */; };
 		B6F6D2321B4FD7B9006F0A9B /* DataSetViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2311B4FD7B9006F0A9B /* DataSetViewerTests.m */; };
 		B6F6D23F1B4FD80E006F0A9B /* DSVTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D23E1B4FD80E006F0A9B /* DSVTableViewController.m */; };
-		B6F6D2421B4FD82D006F0A9B /* DSVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2411B4FD82D006F0A9B /* DSVTableViewCell.m */; };
 		B6F6D2451B4FD952006F0A9B /* DSVNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2441B4FD952006F0A9B /* DSVNavigationViewController.m */; };
 		B6F6D2481B4FD98B006F0A9B /* DSVDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2471B4FD98B006F0A9B /* DSVDataManager.m */; };
 		B6F6D25E1B4FDA3C006F0A9B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D24C1B4FDA3C006F0A9B /* AFHTTPRequestOperation.m */; };
@@ -28,6 +27,9 @@
 		B6F6D2661B4FDA3C006F0A9B /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D25D1B4FDA3C006F0A9B /* AFURLSessionManager.m */; };
 		B6F6D26A1B4FF21C006F0A9B /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2691B4FF21C006F0A9B /* CHCSVParser.m */; };
 		B6F6D26D1B4FFC52006F0A9B /* DSVDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D26C1B4FFC52006F0A9B /* DSVDataSet.m */; };
+		B6F6D2721B50200D006F0A9B /* DSVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2701B50200D006F0A9B /* DSVTableViewCell.m */; };
+		B6F6D2731B50200D006F0A9B /* DSVTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D2711B50200D006F0A9B /* DSVTableViewCell.xib */; };
+		B6F6D2751B502CA3006F0A9B /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D2741B502CA3006F0A9B /* default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +56,6 @@
 		B6F6D2311B4FD7B9006F0A9B /* DataSetViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataSetViewerTests.m; sourceTree = "<group>"; };
 		B6F6D23D1B4FD80E006F0A9B /* DSVTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVTableViewController.h; sourceTree = "<group>"; };
 		B6F6D23E1B4FD80E006F0A9B /* DSVTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVTableViewController.m; sourceTree = "<group>"; };
-		B6F6D2401B4FD82D006F0A9B /* DSVTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVTableViewCell.h; sourceTree = "<group>"; };
-		B6F6D2411B4FD82D006F0A9B /* DSVTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVTableViewCell.m; sourceTree = "<group>"; };
 		B6F6D2431B4FD952006F0A9B /* DSVNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVNavigationViewController.h; sourceTree = "<group>"; };
 		B6F6D2441B4FD952006F0A9B /* DSVNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVNavigationViewController.m; sourceTree = "<group>"; };
 		B6F6D2461B4FD98B006F0A9B /* DSVDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVDataManager.h; sourceTree = "<group>"; };
@@ -83,6 +83,10 @@
 		B6F6D2691B4FF21C006F0A9B /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		B6F6D26B1B4FFC52006F0A9B /* DSVDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVDataSet.h; sourceTree = "<group>"; };
 		B6F6D26C1B4FFC52006F0A9B /* DSVDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVDataSet.m; sourceTree = "<group>"; };
+		B6F6D26F1B50200D006F0A9B /* DSVTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVTableViewCell.h; sourceTree = "<group>"; };
+		B6F6D2701B50200D006F0A9B /* DSVTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVTableViewCell.m; sourceTree = "<group>"; };
+		B6F6D2711B50200D006F0A9B /* DSVTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DSVTableViewCell.xib; sourceTree = "<group>"; };
+		B6F6D2741B502CA3006F0A9B /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 		B6F6D2141B4FD7B9006F0A9B /* DataSetViewer */ = {
 			isa = PBXGroup;
 			children = (
+				B6F6D26E1B501FE2006F0A9B /* Controllers */,
 				B6F6D2491B4FD9F7006F0A9B /* Tools */,
 				B6F6D23C1B4FD7E4006F0A9B /* Model */,
 				B6F6D23B1B4FD7CD006F0A9B /* Views */,
@@ -131,10 +136,6 @@
 				B6F6D21A1B4FD7B9006F0A9B /* AppDelegate.m */,
 				B6F6D2221B4FD7B9006F0A9B /* Images.xcassets */,
 				B6F6D2151B4FD7B9006F0A9B /* Supporting Files */,
-				B6F6D23D1B4FD80E006F0A9B /* DSVTableViewController.h */,
-				B6F6D23E1B4FD80E006F0A9B /* DSVTableViewController.m */,
-				B6F6D2401B4FD82D006F0A9B /* DSVTableViewCell.h */,
-				B6F6D2411B4FD82D006F0A9B /* DSVTableViewCell.m */,
 				B6F6D2431B4FD952006F0A9B /* DSVNavigationViewController.h */,
 				B6F6D2441B4FD952006F0A9B /* DSVNavigationViewController.m */,
 			);
@@ -144,6 +145,7 @@
 		B6F6D2151B4FD7B9006F0A9B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B6F6D2741B502CA3006F0A9B /* default.png */,
 				B6F6D2161B4FD7B9006F0A9B /* Info.plist */,
 				B6F6D2171B4FD7B9006F0A9B /* main.m */,
 			);
@@ -233,6 +235,18 @@
 			path = libs/CHCSVParser;
 			sourceTree = "<group>";
 		};
+		B6F6D26E1B501FE2006F0A9B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6F6D23D1B4FD80E006F0A9B /* DSVTableViewController.h */,
+				B6F6D23E1B4FD80E006F0A9B /* DSVTableViewController.m */,
+				B6F6D26F1B50200D006F0A9B /* DSVTableViewCell.h */,
+				B6F6D2701B50200D006F0A9B /* DSVTableViewCell.m */,
+				B6F6D2711B50200D006F0A9B /* DSVTableViewCell.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -314,8 +328,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6F6D2211B4FD7B9006F0A9B /* Main.storyboard in Resources */,
+				B6F6D2731B50200D006F0A9B /* DSVTableViewCell.xib in Resources */,
 				B6F6D2261B4FD7B9006F0A9B /* LaunchScreen.xib in Resources */,
 				B6F6D2231B4FD7B9006F0A9B /* Images.xcassets in Resources */,
+				B6F6D2751B502CA3006F0A9B /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,7 +351,7 @@
 			files = (
 				B6F6D2661B4FDA3C006F0A9B /* AFURLSessionManager.m in Sources */,
 				B6F6D21B1B4FD7B9006F0A9B /* AppDelegate.m in Sources */,
-				B6F6D2421B4FD82D006F0A9B /* DSVTableViewCell.m in Sources */,
+				B6F6D2721B50200D006F0A9B /* DSVTableViewCell.m in Sources */,
 				B6F6D2611B4FDA3C006F0A9B /* AFNetworkReachabilityManager.m in Sources */,
 				B6F6D2451B4FD952006F0A9B /* DSVNavigationViewController.m in Sources */,
 				B6F6D2631B4FDA3C006F0A9B /* AFURLConnectionOperation.m in Sources */,

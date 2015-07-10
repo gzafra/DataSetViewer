@@ -7,11 +7,17 @@
 //
 
 #import "DSVTableViewController.h"
+#import "DSVTableViewCell.h"
 
 @interface DSVTableViewController ()
 
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIView *loadingView;
+
+//@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
+@property (nonatomic, weak) DSVDataManager *dataManager;
 
 @end
 
@@ -20,16 +26,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    DSVDataManager *dataManager = [DSVDataManager sharedManager];
-    dataManager.delegate = self;
-    [dataManager loadRemoteData];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DSVTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"DataSetCell"];
+    
+    self.dataManager = [DSVDataManager sharedManager];
+    self.dataManager.delegate = self;
+    [self.dataManager loadRemoteData];
     
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-    [view addSubview:self.activityIndicator]; // <-- Your UIActivityIndicatorView
-    self.activityIndicator.center = CGPointMake(view.frame.size.width/2, view.frame.size.height/2);
-    self.tableView.tableHeaderView = view;
+    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    [self.loadingView addSubview:self.activityIndicator];
+    self.activityIndicator.center = CGPointMake(self.loadingView.frame.size.width/2, self.loadingView.frame.size.height/2);
+    self.tableView.tableHeaderView = self.loadingView;
     [self.activityIndicator startAnimating];
+    
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor grayColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(loadRemoteData)
+                  forControlEvents:UIControlEventValueChanged];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -43,10 +59,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadRemoteData{
+    [self.dataManager loadRemoteData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return self.dataSource.count;
 }
@@ -57,10 +76,10 @@
     
     DSVDataSet *dataSet = [self.dataSource objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    DSVTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+       cell = [[DSVTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
     cell.textLabel.text = dataSet.title;
@@ -68,6 +87,10 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80;
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -118,7 +141,8 @@
 - (void)dataFinishedLoading:(NSArray*)dataLoaded{
     [self.activityIndicator stopAnimating];
     self.tableView.tableHeaderView = nil;
-    
+    [self.refreshControl endRefreshing];
+
     self.dataSource = dataLoaded;
     [self.tableView reloadData];
 }
