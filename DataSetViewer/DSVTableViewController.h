@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DSVTableViewController.h
 //  DataSetViewer
 //
 //  Created by Guillermo Zafra on 10/07/2015.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSVDataManager.h"
 
-@interface ViewController : UIViewController
-
+@interface DSVTableViewController : UITableViewController <DSVDataManagerDelegate>
 
 @end
-
