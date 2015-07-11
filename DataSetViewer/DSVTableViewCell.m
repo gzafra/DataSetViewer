@@ -8,6 +8,7 @@
 
 #import "DSVTableViewCell.h"
 #import "AFNetworking.h"
+#import "UIImage+Resizable.h"
 
 #define kHorizontalOffset 10.0f
 #define kVerticalOffset 4.0f
@@ -41,6 +42,11 @@
 }
 
 - (void)updateWithImage:(UIImage*)image{
+    if (MAX(image.size.width, image.size.height) > kImageSize) {
+        [self.myImageView setImage:[image imageScaledToSize:CGSizeMake(kImageSize, kImageSize)]];
+    }else{
+        [self.myImageView setImage:image];
+    }
     [self.myImageView setImage:image];
     self.myImageView.frame = CGRectMake(kHorizontalOffset, 0, kImageSize, kImageSize);
     self.myImageView.center = CGPointMake(kHorizontalOffset + kImageSize/2, self.frame.size.height/2);
