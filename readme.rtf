@@ -1,0 +1,21 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 The solution features a DataManager that will retrieve the data from the remote CSV, parse it and delegate on the TableViewController to display it.\
+\
+Each row will display a thumbnail of the image and the title and can display more information in a DetailView.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 Images are loaded and displayed asynchronously and cached with the rest of information loaded.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+Cache is handled through the DataManager, which has a mode to know what kind of caching should be done. (Everything, only images or nothing). Even when cache is enabled, images will be requested again if they failed to load previously. Also, data is cached only during a specific period of time since it was retrieved last time. (Set to 30 min by default).\
+\
+Parsing is done in a not restrictive way, where only the number of items per row will be check. It will allow multiple lines, out of quotes fields and invalid urls.\
+\
+Any exceptions or errors in the DataManager will be delegated to the main ViewController where they will be displayed as a banner-like view on top of the TableView.\
+\
+External libraries include AFNetworking, CHCSVParser and Reachability.}
