@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  DataSetViewer
+
+  Created by Guillermo Zafra on 11/07/15.
+  Copyright (c) 2015 Guillermo Zafra. All rights reserved.
+*/
+
+"LoadFailed" = "Data failed to load";
+
+"LoadingData" = "Loading data remotely...";
+
+"NotConnected" = "Not connected";

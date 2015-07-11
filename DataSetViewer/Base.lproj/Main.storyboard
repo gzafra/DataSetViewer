@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--DataViewer-->
         <scene sceneID="gdo-m0-DOU">
             <objects>
                 <tableViewController id="i8n-29-WL4" customClass="DSVTableViewController" sceneMemberID="viewController">
@@ -25,7 +25,7 @@
                             <outlet property="delegate" destination="i8n-29-WL4" id="40f-gw-idX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="YXV-fq-bbv"/>
+                    <navigationItem key="navigationItem" title="DataViewer" id="YXV-fq-bbv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="REr-Zr-KI9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

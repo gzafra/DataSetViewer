@@ -69,15 +69,15 @@ typedef enum : NSUInteger {
     {
         NSLog(@"success: %@", operation.responseString);
         [weakSelf parseCSVDataFromString:operation.responseString];
-        [self.delegate dataFinishedLoading:weakSelf.dataCache];
+        [weakSelf.delegate dataFinishedLoading:weakSelf.dataCache];
     }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"error: %@",  operation.responseString);
-              
+              // TODO: Send some info about why?
+              [weakSelf.delegate dataFailedToLoad];
           }
      ];
     [operation start];
-    
 }
 
 - (void)parseCSVDataFromString:(NSString*)csvString{

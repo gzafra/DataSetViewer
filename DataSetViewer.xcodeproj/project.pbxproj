@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B68757391B5108F500AB0A3E /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757381B5108F500AB0A3E /* NSString+Utils.m */; };
 		B687573C1B51213700AB0A3E /* DSVDataParsingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B687573B1B51213700AB0A3E /* DSVDataParsingOptions.m */; };
+		B687573F1B51AC2C00AB0A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B687573E1B51AC2C00AB0A3E /* Localizable.strings */; };
 		B6F6D2181B4FD7B9006F0A9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2171B4FD7B9006F0A9B /* main.m */; };
 		B6F6D21B1B4FD7B9006F0A9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D21A1B4FD7B9006F0A9B /* AppDelegate.m */; };
 		B6F6D2211B4FD7B9006F0A9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D21F1B4FD7B9006F0A9B /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		B687573A1B51213700AB0A3E /* DSVDataParsingOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVDataParsingOptions.h; sourceTree = "<group>"; };
 		B687573B1B51213700AB0A3E /* DSVDataParsingOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVDataParsingOptions.m; sourceTree = "<group>"; };
 		B687573D1B51226F00AB0A3E /* GlobalDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalDefinitions.h; sourceTree = "<group>"; };
+		B687573E1B51AC2C00AB0A3E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		B6F6D2121B4FD7B9006F0A9B /* DataSetViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSetViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F6D2161B4FD7B9006F0A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6F6D2171B4FD7B9006F0A9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				B6F6D2741B502CA3006F0A9B /* default.png */,
 				B6F6D2161B4FD7B9006F0A9B /* Info.plist */,
 				B6F6D2171B4FD7B9006F0A9B /* main.m */,
+				B687573E1B51AC2C00AB0A3E /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6F6D2211B4FD7B9006F0A9B /* Main.storyboard in Resources */,
+				B687573F1B51AC2C00AB0A3E /* Localizable.strings in Resources */,
 				B6F6D2731B50200D006F0A9B /* DSVTableViewCell.xib in Resources */,
 				B6F6D2261B4FD7B9006F0A9B /* LaunchScreen.xib in Resources */,
 				B6F6D2231B4FD7B9006F0A9B /* Images.xcassets in Resources */,
