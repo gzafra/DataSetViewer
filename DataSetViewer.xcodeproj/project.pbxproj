@@ -172,6 +172,7 @@
 		B6F6D23B1B4FD7CD006F0A9B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6F6D2711B50200D006F0A9B /* DSVTableViewCell.xib */,
 				B6F6D21F1B4FD7B9006F0A9B /* Main.storyboard */,
 				B6F6D2241B4FD7B9006F0A9B /* LaunchScreen.xib */,
 			);
@@ -242,7 +243,6 @@
 				B6F6D23E1B4FD80E006F0A9B /* DSVTableViewController.m */,
 				B6F6D26F1B50200D006F0A9B /* DSVTableViewCell.h */,
 				B6F6D2701B50200D006F0A9B /* DSVTableViewCell.m */,
-				B6F6D2711B50200D006F0A9B /* DSVTableViewCell.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -443,7 +443,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -481,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -494,6 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DataSetViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -504,6 +505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DataSetViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -562,6 +564,7 @@
 				B6F6D2371B4FD7B9006F0A9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B6F6D2381B4FD7B9006F0A9B /* Build configuration list for PBXNativeTarget "DataSetViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +573,7 @@
 				B6F6D23A1B4FD7B9006F0A9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

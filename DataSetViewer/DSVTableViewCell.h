@@ -10,4 +10,6 @@
 
 @interface DSVTableViewCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UILabel *textLabel;
+
 @end

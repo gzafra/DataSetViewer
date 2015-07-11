@@ -37,7 +37,8 @@
     
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [weakSelf.imageView setImage:responseObject];
-        [weakSelf.imageView setNeedsDisplay];
+        weakSelf.imageView.frame = CGRectMake(0, 0, 64, 64);
+        weakSelf.imageView.center = CGPointMake(10 + weakSelf.imageView.frame.size.width/2, weakSelf.frame.size.height/2);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error loading image");
     }];
