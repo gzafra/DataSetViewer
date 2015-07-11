@@ -9,6 +9,7 @@
 #import "DSVDataManager.h"
 #import "AFNetworking.h"
 #import "CHCSVParser.h"
+#import "Reachability.h"
 
 #define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=0Aqg9JQbnOwBwdEZFN2JKeldGZGFzUWVrNDBsczZxLUE&single=true&gid=0&output=csv"
 #define kCacheDurationInMinutes 60
@@ -27,6 +28,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) DSVDataManagerCacheMode cacheMode;
 @property (nonatomic, assign) NSTimeInterval lastTimeUpdated;
 @property (nonatomic, assign) NSUInteger imagesToLoad;
+@property (nonatomic, assign) NetworkStatus currentNetworkStatus;
 
 @end
 
@@ -49,6 +51,8 @@ typedef enum : NSUInteger {
         _dataCache = [NSMutableArray new];
         _cacheMode = DSVDataManagerCacheOnlyImages; // Default cache mode
         [self loadData];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     }
     return self;
 }
@@ -67,7 +71,6 @@ typedef enum : NSUInteger {
     __weak typeof(self) weakSelf = self;
     [operation  setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"success: %@", operation.responseString);
         [weakSelf parseCSVDataFromString:operation.responseString];
         [weakSelf.delegate dataFinishedLoading:weakSelf.dataCache];
     }
@@ -197,6 +200,18 @@ typedef enum : NSUInteger {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSArray *loadedData = (NSArray*)[NSKeyedUnarchiver unarchiveObjectWithData:[prefs objectForKey:kKeyStoredData]];
     self.dataCache = [NSMutableArray arrayWithArray:loadedData];
+}
+
+#pragma mark - Reachability
+
+- (void) reachabilityChanged:(NSNotification *)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
+    if (curReach.currentReachabilityStatus == NotReachable) {
+        self.currentNetworkStatus = curReach.currentReachabilityStatus;
+        NSLog(@"Not reachable");
+    }
 }
 
 @end

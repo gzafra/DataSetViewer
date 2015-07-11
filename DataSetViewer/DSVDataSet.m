@@ -21,6 +21,15 @@
     return self;
 }
 
+- (BOOL)isEqual:(DSVDataSet*)data{
+    if ([data.title isEqualToString:self.title]) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - Properties
+
 - (void)setTitle:(NSString *)title{
     if (_title != title) {
         _title = [[title stringByRemovingHtmlTags] stringByRemovingQuotes];
@@ -33,11 +42,10 @@
     }
 }
 
-- (BOOL)isEqual:(DSVDataSet*)data{
-    if ([data.title isEqualToString:self.title]) {
-        return YES;
+- (void)setImage:(NSData *)image{
+    if (_image != image) {
+        _image = image;
     }
-    return NO;
 }
 
 #pragma mark - Serialization

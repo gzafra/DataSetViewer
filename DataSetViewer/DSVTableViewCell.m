@@ -8,6 +8,7 @@
 
 #import "DSVTableViewCell.h"
 #import "AFNetworking.h"
+#import "UIImage+Resizable.h"
 
 #define kHorizontalOffset 10.0f
 #define kVerticalOffset 4.0f
@@ -37,9 +38,7 @@
 
 - (void)awakeFromNib {
     // Sets default initial image
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"png"];
-    [self.myImageView setImage:[UIImage imageWithContentsOfFile:path]];
-    [self updateWithImage:[UIImage imageWithContentsOfFile:path]];
+    [self updateWithImage:[UIImage imageNamed:@"default.png"]];
 }
 
 - (void)updateWithImage:(UIImage*)image{
