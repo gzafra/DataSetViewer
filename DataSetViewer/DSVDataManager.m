@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "CHCSVParser.h"
 #import "Reachability.h"
+#import "DSVDataParsingOptions.h"
 
 #define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=0Aqg9JQbnOwBwdEZFN2JKeldGZGFzUWVrNDBsczZxLUE&single=true&gid=0&output=csv"
 #define kCacheDurationInMinutes 60
@@ -22,14 +23,20 @@ typedef enum : NSUInteger {
     DSVDataManagerCacheAll,
 } DSVDataManagerCacheMode;
 
+
+typedef enum : NSUInteger {
+    EUnreachable,
+    EReachableWifi,
+    EReachableWWAN,
+} DSVReachabilityType;
+
 @interface DSVDataManager()
 
 @property (nonatomic, strong) NSMutableArray *dataCache;
 @property (nonatomic, assign) DSVDataManagerCacheMode cacheMode;
 @property (nonatomic, assign) NSTimeInterval lastTimeUpdated;
 @property (nonatomic, assign) NSUInteger imagesToLoad;
-@property (nonatomic, assign) NetworkStatus currentNetworkStatus;
-@property (nonatomic, strong) Reachability *reachibility;
+@property (nonatomic) DSVReachabilityType reachability;
 
 @end
 
@@ -51,9 +58,27 @@ typedef enum : NSUInteger {
     if (self = [super init]) {
         _dataCache = [NSMutableArray new];
         _cacheMode = DSVDataManagerCacheOnlyImages; // Default cache mode
+        
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            
+            if (status == AFNetworkReachabilityStatusNotReachable) {
+                // Not reachable
+                self.reachability = EUnreachable;
+            } else {
+                if (status == AFNetworkReachabilityStatusReachableViaWiFi) {
+                    // On wifi
+                    self.reachability = EReachableWifi;
+                }else if (status == AFNetworkReachabilityStatusReachableViaWWAN){
+                    // On WWAN
+                    self.reachability = EReachableWWAN;
+                }else{
+                    self.reachability = EUnreachable;
+                }
+            }
+        }];
+        
         [self loadData];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     }
     return self;
 }
@@ -202,13 +227,13 @@ typedef enum : NSUInteger {
 
 #pragma mark - Reachability
 
-- (void) reachabilityChanged:(NSNotification *)note
-{
-    Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
-    if (curReach.currentReachabilityStatus == NotReachable) {
-        self.currentNetworkStatus = curReach.currentReachabilityStatus;
-        NSLog(@"Not reachable");
+- (void)setReachability:(DSVReachabilityType)reachability{
+    if (_reachability != reachability) {
+        
+        _reachability = reachability;
+        if (_reachability == EUnreachable) {
+            [self.delegate notConnected];
+        }
     }
 }
 

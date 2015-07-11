@@ -14,6 +14,7 @@
 - (void)dataFinishedLoading:(NSArray*)dataLoaded;
 - (void)imageLoadedForDataSet:(DSVDataSet*)dataSet;
 - (void)dataFailedToLoad;
+- (void)notConnected;
 
 @end
 

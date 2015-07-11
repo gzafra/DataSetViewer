@@ -31,7 +31,7 @@
     self.dataManager = [DSVDataManager sharedManager];
     self.dataManager.delegate = self;
     [self.dataManager loadRemoteData];
-
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor grayColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
@@ -79,9 +79,18 @@
 }
 
 - (void)hideLoadingView{
-    [self.activityIndicator stopAnimating];
-    [self.activityIndicator removeFromSuperview];
-    self.tableView.tableHeaderView = nil;
+    UIView *tableHeader = self.tableView.tableHeaderView;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.5f animations:^{
+            tableHeader.center = CGPointMake(tableHeader.center.x, -50);
+            tableHeader.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            [self.activityIndicator stopAnimating];
+            [self.activityIndicator removeFromSuperview];
+            self.tableView.tableHeaderView =  nil;
+        }];
+    });
+   
 }
 
 - (void)showErrorViewWithMessage:(NSString*)messageString{
@@ -99,24 +108,26 @@
     label.textColor = [UIColor whiteColor];
     [errorView addSubview:label];
     
-    self.tableView.tableHeaderView = errorView;
-    UIView *tableHeader = self.tableView.tableHeaderView;
-    tableHeader.center = CGPointMake(tableHeader.center.x,-50);
-    tableHeader.alpha = 0.0f;
+    
+    errorView.alpha = 0.0f;
+    errorView.center = CGPointMake(self.view.frame.size.width/2, -25);
+    [self.tableView addSubview:errorView];
+    
+    
     
     // Show animated
     [UIView animateWithDuration:0.5f delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        tableHeader.center = CGPointMake(tableHeader.center.x,50);
-        tableHeader.alpha = 1.0f;
+        errorView.center = CGPointMake(self.view.frame.size.width/2,25);
+        errorView.alpha = 1.0f;
     } completion:^(BOOL finished) {}];
     
     // Hide animated after delay
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.5f animations:^{
-            tableHeader.center = CGPointMake(tableHeader.center.x, -50);
-            tableHeader.alpha = 0.0f;
+            errorView.center = CGPointMake(self.view.frame.size.width/2, -25);
+            errorView.alpha = 0.0f;
         } completion:^(BOOL finished) {
-            self.tableView.tableHeaderView =  nil;
+            [errorView removeFromSuperview];
         }];
     });
 }
@@ -190,6 +201,10 @@
 
 - (void)dataFailedToLoad{
     [self showErrorViewWithMessage:NSLocalizedString(@"LoadFailed", @"Data failed to load")];
+}
+
+- (void)notConnected{
+    [self showErrorViewWithMessage:NSLocalizedString(@"NotConnected", @"Not connected")];
 }
 
 #pragma mark - Navigation
