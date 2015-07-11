@@ -12,7 +12,6 @@
 		B687573F1B51AC2C00AB0A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B687573E1B51AC2C00AB0A3E /* Localizable.strings */; };
 		B68757421B51ADD700AB0A3E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757411B51ADD700AB0A3E /* Reachability.m */; };
 		B68757451B51AFFD00AB0A3E /* DSVDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757441B51AFFD00AB0A3E /* DSVDetailViewController.m */; };
-		B68757481B51C0A300AB0A3E /* UIImage+Resizable.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757471B51C0A300AB0A3E /* UIImage+Resizable.m */; };
 		B6F6D2181B4FD7B9006F0A9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2171B4FD7B9006F0A9B /* main.m */; };
 		B6F6D21B1B4FD7B9006F0A9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D21A1B4FD7B9006F0A9B /* AppDelegate.m */; };
 		B6F6D2211B4FD7B9006F0A9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D21F1B4FD7B9006F0A9B /* Main.storyboard */; };
@@ -59,8 +58,6 @@
 		B68757411B51ADD700AB0A3E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B68757431B51AFFD00AB0A3E /* DSVDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVDetailViewController.h; sourceTree = "<group>"; };
 		B68757441B51AFFD00AB0A3E /* DSVDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVDetailViewController.m; sourceTree = "<group>"; };
-		B68757461B51C0A300AB0A3E /* UIImage+Resizable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resizable.h"; sourceTree = "<group>"; };
-		B68757471B51C0A300AB0A3E /* UIImage+Resizable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resizable.m"; sourceTree = "<group>"; };
 		B6F6D2121B4FD7B9006F0A9B /* DataSetViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSetViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F6D2161B4FD7B9006F0A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6F6D2171B4FD7B9006F0A9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -221,8 +218,6 @@
 				B68757381B5108F500AB0A3E /* NSString+Utils.m */,
 				B68757401B51ADD700AB0A3E /* Reachability.h */,
 				B68757411B51ADD700AB0A3E /* Reachability.m */,
-				B68757461B51C0A300AB0A3E /* UIImage+Resizable.h */,
-				B68757471B51C0A300AB0A3E /* UIImage+Resizable.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -385,7 +380,6 @@
 				B6F6D2721B50200D006F0A9B /* DSVTableViewCell.m in Sources */,
 				B6F6D2611B4FDA3C006F0A9B /* AFNetworkReachabilityManager.m in Sources */,
 				B6F6D2451B4FD952006F0A9B /* DSVNavigationViewController.m in Sources */,
-				B68757481B51C0A300AB0A3E /* UIImage+Resizable.m in Sources */,
 				B6F6D2631B4FDA3C006F0A9B /* AFURLConnectionOperation.m in Sources */,
 				B6F6D2601B4FDA3C006F0A9B /* AFHTTPSessionManager.m in Sources */,
 				B6F6D2641B4FDA3C006F0A9B /* AFURLRequestSerialization.m in Sources */,

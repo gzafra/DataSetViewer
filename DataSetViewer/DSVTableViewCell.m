@@ -8,7 +8,6 @@
 
 #import "DSVTableViewCell.h"
 #import "AFNetworking.h"
-#import "UIImage+Resizable.h"
 
 #define kHorizontalOffset 10.0f
 #define kVerticalOffset 4.0f

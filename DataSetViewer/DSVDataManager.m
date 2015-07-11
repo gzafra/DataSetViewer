@@ -29,6 +29,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSTimeInterval lastTimeUpdated;
 @property (nonatomic, assign) NSUInteger imagesToLoad;
 @property (nonatomic, assign) NetworkStatus currentNetworkStatus;
+@property (nonatomic, strong) Reachability *reachibility;
 
 @end
 
@@ -51,7 +52,7 @@ typedef enum : NSUInteger {
         _dataCache = [NSMutableArray new];
         _cacheMode = DSVDataManagerCacheOnlyImages; // Default cache mode
         [self loadData];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     }
     return self;
@@ -146,16 +147,13 @@ typedef enum : NSUInteger {
     
     requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
     
-    __weak __typeof(sender) weakSender = sender;
-    __weak __typeof(self) weakSelf = self;
-    
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        weakSender.image = responseObject;
-        [weakSelf.delegate imageLoadedForDataSet:weakSender];
-        weakSelf.imagesToLoad--;
+        sender.image = responseObject;
+        [self.delegate imageLoadedForDataSet:sender];
+        self.imagesToLoad--;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error loading image with URL: %@",imageUrl);
-        weakSelf.imagesToLoad--;
+        self.imagesToLoad--;
     }];
     [requestOperation start];
 }
@@ -183,7 +181,7 @@ typedef enum : NSUInteger {
 - (void)setImagesToLoad:(NSUInteger)imagesToLoad{
     if (_imagesToLoad != imagesToLoad) {
         _imagesToLoad = imagesToLoad;
-        if (imagesToLoad == 0) {
+        if (imagesToLoad == 0) { // When all images have been loaded, save data to disk
             [self saveData];
         }
     }

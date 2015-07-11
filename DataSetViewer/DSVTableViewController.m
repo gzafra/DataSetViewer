@@ -136,6 +136,7 @@
     
     DSVTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     cell.imageView.image = nil;
+    
     if (cell == nil) {
        cell = [[DSVTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
@@ -145,6 +146,8 @@
     // Update image if already loaded in the model object
     if (dataSet.image) {
        [cell updateWithImage:(UIImage*)dataSet.image];
+    }else{
+        [cell updateWithImage:[UIImage imageNamed:@"default.png"]];
     }
     
     
