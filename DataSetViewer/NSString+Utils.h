@@ -11,5 +11,6 @@
 @interface NSString (Utils)
 
 @property (nonatomic, readonly) NSString *stringByRemovingHtmlTags;
+@property (nonatomic, readonly) NSString *stringByRemovingQuotes;
 
 @end

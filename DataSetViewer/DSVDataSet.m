@@ -23,7 +23,7 @@
 
 - (void)setTitle:(NSString *)title{
     if (_title != title) {
-        _title = [title stringByRemovingHtmlTags];
+        _title = [[title stringByRemovingHtmlTags] stringByRemovingQuotes];
     }
 }
 
@@ -31,6 +31,13 @@
     if (_additionalDescription != additionalDescription) {
         _additionalDescription = [additionalDescription stringByRemovingHtmlTags];
     }
+}
+
+- (BOOL)isEqual:(DSVDataSet*)data{
+    if ([data.title isEqualToString:self.title]) {
+        return YES;
+    }
+    return NO;
 }
 
 

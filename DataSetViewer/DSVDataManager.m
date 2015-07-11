@@ -11,10 +11,20 @@
 #import "CHCSVParser.h"
 
 #define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=0Aqg9JQbnOwBwdEZFN2JKeldGZGFzUWVrNDBsczZxLUE&single=true&gid=0&output=csv"
+#define kCacheDurationInMinutes 60
+#define kKeyLastUpdate @"lastUpdate"
+
+typedef enum : NSUInteger {
+    DSVDataManagerCacheNone = 0,
+    DSVDataManagerCacheOnlyImages,
+    DSVDataManagerCacheAll,
+} DSVDataManagerCacheMode;
 
 @interface DSVDataManager()
 
 @property (nonatomic, strong) NSMutableArray *dataCache;
+@property (nonatomic, assign) DSVDataManagerCacheMode cacheMode;
+@property (nonatomic, assign) NSTimeInterval lastTimeUpdated;
 
 @end
 
@@ -35,6 +45,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         _dataCache = [NSMutableArray new];
+        _cacheMode = DSVDataManagerCacheOnlyImages; // Default cache mode
     }
     return self;
 }
@@ -42,7 +53,10 @@
 #pragma mark - Loading
 
 - (void)loadRemoteData{
-
+    if (self.cacheMode == DSVDataManagerCacheAll && [self shouldLoadFromCache]) {
+        return;
+    }
+    
     NSURL *url = [NSURL URLWithString:kBaseUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
@@ -53,7 +67,6 @@
         NSLog(@"success: %@", operation.responseString);
         [weakSelf parseCSVDataFromString:operation.responseString];
         [self.delegate dataFinishedLoading:weakSelf.dataCache];
-        
     }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"error: %@",  operation.responseString);
@@ -65,8 +78,12 @@
 }
 
 - (void)parseCSVDataFromString:(NSString*)csvString{
-    [self.dataCache removeAllObjects];
     NSArray *array = [csvString CSVComponents];
+    
+    NSArray *auxData = [NSArray arrayWithArray:self.dataCache];
+    [self.dataCache removeAllObjects];
+    
+    BOOL shouldLoadCachedImages = (self.cacheMode >= DSVDataManagerCacheOnlyImages && [self shouldLoadFromCache]) ? YES : NO;
     
     NSUInteger idx = 0;
     for (NSArray *row in array) {
@@ -75,11 +92,27 @@
                 DSVDataSet *dataSet = [[DSVDataSet alloc] initWithTitle:[row objectAtIndex:0]
                                                                imageUrl:[row objectAtIndex:2]
                                                             description:[row objectAtIndex:1]];
-                [self loadImageWithURL:dataSet.imageUrl sender:dataSet];
+                
+                if (shouldLoadCachedImages) {
+                    // Look for image in cache
+                    for (DSVDataSet *oldData in auxData) {
+                        if ([dataSet isEqual:oldData]) {
+                            dataSet.image = oldData.image;
+                            break;
+                        }
+                    }
+                }
+                
+                // Image not found in cache
+                if (!dataSet.image) {
+                    // Load image asynchronously
+                    [self loadImageWithURL:dataSet.imageUrl sender:dataSet];
+                }
+                
                 
                 [self.dataCache addObject:dataSet];
             }else{
-                NSLog(@"Row at index %ld has more than 3 items",(unsigned long)idx);
+                NSLog(@"ERROR: Row at index %ld has more than 3 items. Skipping",(unsigned long)idx);
             }
         }
         idx++;
@@ -108,6 +141,24 @@
         NSLog(@"Error loading image with URL: %@",imageUrl);
     }];
     [requestOperation start];
+}
+
+- (BOOL)shouldLoadFromCache{
+    NSCalendar *c = [NSCalendar currentCalendar];
+    NSDate *d1 = [NSDate date];
+    
+    CGFloat lastTimeStamp = [[[NSUserDefaults standardUserDefaults] objectForKey:kKeyLastUpdate] floatValue];
+    NSDate *d2 = [NSDate dateWithTimeIntervalSince1970:lastTimeStamp];//2012-06-22
+    NSDateComponents *components = [c components:NSCalendarUnitMinute fromDate:d2 toDate:d1 options:0];
+    NSInteger diff = components.minute;
+    
+    if (diff>kCacheDurationInMinutes) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] forKey:kKeyLastUpdate];
+        [[NSUserDefaults standardUserDefaults]  synchronize];
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 @end

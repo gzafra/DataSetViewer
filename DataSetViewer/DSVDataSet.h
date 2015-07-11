@@ -17,4 +17,7 @@
 
 - (instancetype)initWithTitle:(NSString*)title imageUrl:(NSString*)url description:(NSString*)description;
 
+/// Compares two DSVDataSet objects. Comparing by Title as there is no other safe id
+- (BOOL)isEqual:(DSVDataSet*)data;
+
 @end

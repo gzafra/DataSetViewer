@@ -83,6 +83,8 @@
     }
     
     cell.myTextLabel.text = dataSet.title;
+    
+    // Update image if already loaded in the model object
     if (dataSet.image) {
        [cell updateWithImage:(UIImage*)dataSet.image];
     }
@@ -152,8 +154,9 @@
 }
 
 - (void)imageLoadedForDataSet:(DSVDataSet*)dataSet{
-    NSArray *cells = [self.tableView visibleCells];
+    // Update images from cells that are visible
     
+    NSArray *cells = [self.tableView visibleCells];
     NSUInteger dsIndex = [self.dataSource indexOfObject:dataSet];
     for (DSVTableViewCell *cell in cells) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];

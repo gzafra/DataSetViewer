@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B68757391B5108F500AB0A3E /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757381B5108F500AB0A3E /* NSString+Utils.m */; };
+		B687573C1B51213700AB0A3E /* DSVDataParsingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B687573B1B51213700AB0A3E /* DSVDataParsingOptions.m */; };
 		B6F6D2181B4FD7B9006F0A9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2171B4FD7B9006F0A9B /* main.m */; };
 		B6F6D21B1B4FD7B9006F0A9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D21A1B4FD7B9006F0A9B /* AppDelegate.m */; };
 		B6F6D2211B4FD7B9006F0A9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D21F1B4FD7B9006F0A9B /* Main.storyboard */; };
@@ -46,6 +47,9 @@
 /* Begin PBXFileReference section */
 		B68757371B5108F500AB0A3E /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		B68757381B5108F500AB0A3E /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		B687573A1B51213700AB0A3E /* DSVDataParsingOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVDataParsingOptions.h; sourceTree = "<group>"; };
+		B687573B1B51213700AB0A3E /* DSVDataParsingOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVDataParsingOptions.m; sourceTree = "<group>"; };
+		B687573D1B51226F00AB0A3E /* GlobalDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalDefinitions.h; sourceTree = "<group>"; };
 		B6F6D2121B4FD7B9006F0A9B /* DataSetViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSetViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F6D2161B4FD7B9006F0A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6F6D2171B4FD7B9006F0A9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 				B6F6D2151B4FD7B9006F0A9B /* Supporting Files */,
 				B6F6D2431B4FD952006F0A9B /* DSVNavigationViewController.h */,
 				B6F6D2441B4FD952006F0A9B /* DSVNavigationViewController.m */,
+				B687573D1B51226F00AB0A3E /* GlobalDefinitions.h */,
 			);
 			path = DataSetViewer;
 			sourceTree = "<group>";
@@ -189,6 +194,8 @@
 				B6F6D2471B4FD98B006F0A9B /* DSVDataManager.m */,
 				B6F6D26B1B4FFC52006F0A9B /* DSVDataSet.h */,
 				B6F6D26C1B4FFC52006F0A9B /* DSVDataSet.m */,
+				B687573A1B51213700AB0A3E /* DSVDataParsingOptions.h */,
+				B687573B1B51213700AB0A3E /* DSVDataParsingOptions.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -369,6 +376,7 @@
 				B6F6D25F1B4FDA3C006F0A9B /* AFHTTPRequestOperationManager.m in Sources */,
 				B68757391B5108F500AB0A3E /* NSString+Utils.m in Sources */,
 				B6F6D26A1B4FF21C006F0A9B /* CHCSVParser.m in Sources */,
+				B687573C1B51213700AB0A3E /* DSVDataParsingOptions.m in Sources */,
 				B6F6D2621B4FDA3C006F0A9B /* AFSecurityPolicy.m in Sources */,
 				B6F6D2651B4FDA3C006F0A9B /* AFURLResponseSerialization.m in Sources */,
 				B6F6D25E1B4FDA3C006F0A9B /* AFHTTPRequestOperation.m in Sources */,

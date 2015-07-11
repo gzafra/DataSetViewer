@@ -18,4 +18,8 @@
     return aux;
 }
 
+- (NSString*)stringByRemovingQuotes{
+    return [self stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+}
+
 @end
