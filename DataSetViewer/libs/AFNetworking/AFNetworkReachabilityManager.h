@@ -1,5 +1,6 @@
 // AFNetworkReachabilityManager.h
-// Copyright (c) 2011–2015 Alamofire Software Foundation (http://alamofire.org/)
+//
+// Copyright (c) 2013-2015 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,8 +37,6 @@ typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
     AFNetworkReachabilityStatusReachableViaWWAN = 1,
     AFNetworkReachabilityStatusReachableViaWiFi = 2,
 };
-
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  `AFNetworkReachabilityManager` monitors the reachability of domains, and addresses for both WWAN and WiFi network interfaces.
@@ -138,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param block A block object to be executed when the network availability of the `baseURL` host changes.. This block has no return value and takes a single argument which represents the various reachability states from the device to the `baseURL`.
  */
-- (void)setReachabilityStatusChangeBlock:(nullable void (^)(AFNetworkReachabilityStatus status))block;
+- (void)setReachabilityStatusChangeBlock:(void (^)(AFNetworkReachabilityStatus status))block;
 
 @end
 
@@ -200,5 +199,3 @@ extern NSString * const AFNetworkingReachabilityNotificationStatusItem;
  Returns a localized string representation of an `AFNetworkReachabilityStatus` value.
  */
 extern NSString * AFStringFromNetworkReachabilityStatus(AFNetworkReachabilityStatus status);
-
-NS_ASSUME_NONNULL_END
