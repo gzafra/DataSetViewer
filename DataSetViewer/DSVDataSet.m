@@ -40,5 +40,26 @@
     return NO;
 }
 
+#pragma mark - Serialization
+
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    //Encode the properties of the object
+    [encoder encodeObject:self.title forKey:@"title"];
+    [encoder encodeObject:self.imageUrl forKey:@"imageUrl"];
+    [encoder encodeObject:self.additionalDescription forKey:@"description"];
+    [encoder encodeObject:self.image forKey:@"image"];
+}
+
+-(id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init]){
+        //decode the properties
+        self.title = [decoder decodeObjectForKey:@"title"];
+        self.imageUrl = [decoder decodeObjectForKey:@"imagleUrl"];
+        self.additionalDescription = [decoder decodeObjectForKey:@"description"];
+        self.image = [decoder decodeObjectForKey:@"image"];
+    }
+    return self;
+}
 
 @end

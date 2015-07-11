@@ -13,6 +13,7 @@
 #define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=0Aqg9JQbnOwBwdEZFN2JKeldGZGFzUWVrNDBsczZxLUE&single=true&gid=0&output=csv"
 #define kCacheDurationInMinutes 60
 #define kKeyLastUpdate @"lastUpdate"
+#define kKeyStoredData @"storedData"
 
 typedef enum : NSUInteger {
     DSVDataManagerCacheNone = 0,
@@ -25,6 +26,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSMutableArray *dataCache;
 @property (nonatomic, assign) DSVDataManagerCacheMode cacheMode;
 @property (nonatomic, assign) NSTimeInterval lastTimeUpdated;
+@property (nonatomic, assign) NSUInteger imagesToLoad;
 
 @end
 
@@ -46,6 +48,7 @@ typedef enum : NSUInteger {
     if (self = [super init]) {
         _dataCache = [NSMutableArray new];
         _cacheMode = DSVDataManagerCacheOnlyImages; // Default cache mode
+        [self loadData];
     }
     return self;
 }
@@ -86,6 +89,7 @@ typedef enum : NSUInteger {
     BOOL shouldLoadCachedImages = (self.cacheMode >= DSVDataManagerCacheOnlyImages && [self shouldLoadFromCache]) ? YES : NO;
     
     NSUInteger idx = 0;
+    NSUInteger imagesNotFromCache = 0;
     for (NSArray *row in array) {
         if (idx > 0) {
             if (row.count == 3) {
@@ -105,6 +109,7 @@ typedef enum : NSUInteger {
                 
                 // Image not found in cache
                 if (!dataSet.image) {
+                    imagesNotFromCache++;
                     // Load image asynchronously
                     [self loadImageWithURL:dataSet.imageUrl sender:dataSet];
                 }
@@ -116,6 +121,13 @@ typedef enum : NSUInteger {
             }
         }
         idx++;
+    }
+    
+    if (imagesNotFromCache > 0) {
+        self.imagesToLoad = imagesNotFromCache;
+    }else{
+        // Everything already loaded, save data
+        [self saveData];
     }
 }
 
@@ -137,8 +149,10 @@ typedef enum : NSUInteger {
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         weakSender.image = responseObject;
         [weakSelf.delegate imageLoadedForDataSet:weakSender];
+        weakSelf.imagesToLoad--;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error loading image with URL: %@",imageUrl);
+        weakSelf.imagesToLoad--;
     }];
     [requestOperation start];
 }
@@ -159,6 +173,30 @@ typedef enum : NSUInteger {
     }else{
         return YES;
     }
+}
+
+#pragma mark - Storage
+
+- (void)setImagesToLoad:(NSUInteger)imagesToLoad{
+    if (_imagesToLoad != imagesToLoad) {
+        _imagesToLoad = imagesToLoad;
+        if (imagesToLoad == 0) {
+            [self saveData];
+        }
+    }
+}
+
+- (void)saveData{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.dataCache];
+    [prefs setObject:myEncodedObject forKey:kKeyStoredData];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)loadData{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSArray *loadedData = (NSArray*)[NSKeyedUnarchiver unarchiveObjectWithData:[prefs objectForKey:kKeyStoredData]];
+    self.dataCache = [NSMutableArray arrayWithArray:loadedData];
 }
 
 @end
