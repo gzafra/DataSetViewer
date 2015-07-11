@@ -9,9 +9,8 @@
 #ifndef DataSetViewer_GlobalDefinitions_h
 #define DataSetViewer_GlobalDefinitions_h
 
-#warning TODO: Reachability to check for connection
+#warning TODO: Reachability to check for connection at startup
 #warning TODO: Lines and Components Mode for parsing CSV
-#warning TODO: Detail view with pic, description and others
-#warning TODO: Error view
+#warning TODO: Error view must be relative
 
 #endif

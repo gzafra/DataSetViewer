@@ -154,8 +154,6 @@
 				B6F6D21A1B4FD7B9006F0A9B /* AppDelegate.m */,
 				B6F6D2221B4FD7B9006F0A9B /* Images.xcassets */,
 				B6F6D2151B4FD7B9006F0A9B /* Supporting Files */,
-				B6F6D2431B4FD952006F0A9B /* DSVNavigationViewController.h */,
-				B6F6D2441B4FD952006F0A9B /* DSVNavigationViewController.m */,
 				B687573D1B51226F00AB0A3E /* GlobalDefinitions.h */,
 			);
 			path = DataSetViewer;
@@ -267,6 +265,8 @@
 		B6F6D26E1B501FE2006F0A9B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6F6D2431B4FD952006F0A9B /* DSVNavigationViewController.h */,
+				B6F6D2441B4FD952006F0A9B /* DSVNavigationViewController.m */,
 				B6F6D23D1B4FD80E006F0A9B /* DSVTableViewController.h */,
 				B6F6D23E1B4FD80E006F0A9B /* DSVTableViewController.m */,
 				B6F6D26F1B50200D006F0A9B /* DSVTableViewCell.h */,
