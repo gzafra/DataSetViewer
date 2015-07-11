@@ -10,6 +10,9 @@
 
 @interface DSVTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *textLabel;
+@property (nonatomic, strong) UILabel *myTextLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *myImageView;
+
+- (void)updateWithImage:(UIImage*)image;
 
 @end

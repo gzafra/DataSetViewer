@@ -9,12 +9,19 @@
 #import "DSVTableViewCell.h"
 #import "AFNetworking.h"
 
+#define kImageLeftOffset 10
+#define kImageSize 64
+
 @implementation DSVTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+-(instancetype)initWithCoder:(NSCoder*)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
     
-    if (self) {
+    if(self)
+    {
+        self.myTextLabel = [[UILabel alloc] initWithFrame: CGRectMake(kImageLeftOffset * 2 + kImageSize, 5, 100, 60)];
+        [self addSubview:self.myTextLabel];
     }
     
     return self;
@@ -23,26 +30,15 @@
 - (void)awakeFromNib {
     // Sets default initial image
     NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"png"];
-    [self.imageView setImage:[UIImage imageWithContentsOfFile:path]];
-    
-    // Asynchronously load the image from the url
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://lorempixel.com/200/200/people/"]];
-    [urlRequest setCachePolicy: NSURLRequestReturnCacheDataElseLoad];
+    [self.myImageView setImage:[UIImage imageWithContentsOfFile:path]];
+    [self updateWithImage:[UIImage imageWithContentsOfFile:path]];
+}
 
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-    
-    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-    
-    __weak __typeof(self) weakSelf = self;
-    
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [weakSelf.imageView setImage:responseObject];
-        weakSelf.imageView.frame = CGRectMake(0, 0, 64, 64);
-        weakSelf.imageView.center = CGPointMake(10 + weakSelf.imageView.frame.size.width/2, weakSelf.frame.size.height/2);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error loading image");
-    }];
-    [requestOperation start];
+- (void)updateWithImage:(UIImage*)image{
+    [self.myImageView setImage:image];
+    self.myImageView.frame = CGRectMake(kImageLeftOffset, 0, kImageSize, kImageSize);
+    self.myImageView.center = CGPointMake(kImageLeftOffset + kImageSize/2, self.frame.size.height/2);
+    self.myImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

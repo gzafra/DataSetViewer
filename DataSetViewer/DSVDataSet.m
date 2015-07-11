@@ -7,16 +7,31 @@
 //
 
 #import "DSVDataSet.h"
+#import "NSString+Utils.h"
+
 
 @implementation DSVDataSet
 
 - (instancetype)initWithTitle:(NSString*)title imageUrl:(NSString*)url description:(NSString*)description{
     if (self = [super init]) {
-        _title = title;
+        self.title = title;
         _imageUrl = url;
-        _additionalDescription = description;
+        self.additionalDescription = description;
     }
     return self;
 }
+
+- (void)setTitle:(NSString *)title{
+    if (_title != title) {
+        _title = [title stringByRemovingHtmlTags];
+    }
+}
+
+- (void)setAdditionalDescription:(NSString *)additionalDescription{
+    if (_additionalDescription != additionalDescription) {
+        _additionalDescription = [additionalDescription stringByRemovingHtmlTags];
+    }
+}
+
 
 @end

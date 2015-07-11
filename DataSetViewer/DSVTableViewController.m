@@ -82,7 +82,11 @@
        cell = [[DSVTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = dataSet.title;
+    cell.myTextLabel.text = dataSet.title;
+    if (dataSet.image) {
+       [cell updateWithImage:(UIImage*)dataSet.image];
+    }
+    
     
     return cell;
 }
@@ -145,6 +149,18 @@
 
     self.dataSource = dataLoaded;
     [self.tableView reloadData];
+}
+
+- (void)imageLoadedForDataSet:(DSVDataSet*)dataSet{
+    NSArray *cells = [self.tableView visibleCells];
+    
+    NSUInteger dsIndex = [self.dataSource indexOfObject:dataSet];
+    for (DSVTableViewCell *cell in cells) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        if (dsIndex == indexPath.row) {
+            [cell updateWithImage:(UIImage*)dataSet.image];
+        }
+    }
 }
 
 @end

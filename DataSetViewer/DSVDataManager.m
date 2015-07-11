@@ -10,6 +10,8 @@
 #import "AFNetworking.h"
 #import "CHCSVParser.h"
 
+#define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=0Aqg9JQbnOwBwdEZFN2JKeldGZGFzUWVrNDBsczZxLUE&single=true&gid=0&output=csv"
+
 @interface DSVDataManager()
 
 @property (nonatomic, strong) NSMutableArray *dataCache;
@@ -41,7 +43,7 @@
 
 - (void)loadRemoteData{
 
-    NSURL *url = [NSURL URLWithString:@"https://docs.google.com/spreadsheets/d/13gEAP1RIpspYY8qNRmS3W3ffdNrb-fueB-qjc2asRpo/export?format=csv&id=KEY&gid=0"];
+    NSURL *url = [NSURL URLWithString:kBaseUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
     
@@ -66,19 +68,46 @@
     [self.dataCache removeAllObjects];
     NSArray *array = [csvString CSVComponents];
     
+    NSUInteger idx = 0;
     for (NSArray *row in array) {
-#warning TODO: Log if row has a different number of items, corrupt register
-        if (row.count == 3) {
-            DSVDataSet *dataSet = [[DSVDataSet alloc] initWithTitle:[row objectAtIndex:0]
-                                                           imageUrl:[row objectAtIndex:1]
-                                                        description:[row objectAtIndex:2]];
-            [self.dataCache addObject:dataSet];
+        if (idx > 0) {
+            if (row.count == 3) {
+                DSVDataSet *dataSet = [[DSVDataSet alloc] initWithTitle:[row objectAtIndex:0]
+                                                               imageUrl:[row objectAtIndex:2]
+                                                            description:[row objectAtIndex:1]];
+                [self loadImageWithURL:dataSet.imageUrl sender:dataSet];
+                
+                [self.dataCache addObject:dataSet];
+            }else{
+                NSLog(@"Row at index %ld has more than 3 items",(unsigned long)idx);
+            }
         }
+        idx++;
     }
 }
 
 - (NSArray*)remoteData{
     return self.dataCache;
+}
+
+- (void)loadImageWithURL:(NSString*)imageUrl sender:(DSVDataSet*)sender{
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
+    [urlRequest setCachePolicy: NSURLRequestReturnCacheDataElseLoad];
+    
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    
+    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    
+    __weak __typeof(sender) weakSender = sender;
+    __weak __typeof(self) weakSelf = self;
+    
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        weakSender.image = responseObject;
+        [weakSelf.delegate imageLoadedForDataSet:weakSender];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error loading image with URL: %@",imageUrl);
+    }];
+    [requestOperation start];
 }
 
 @end

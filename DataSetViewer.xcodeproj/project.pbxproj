@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B68757391B5108F500AB0A3E /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757381B5108F500AB0A3E /* NSString+Utils.m */; };
 		B6F6D2181B4FD7B9006F0A9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D2171B4FD7B9006F0A9B /* main.m */; };
 		B6F6D21B1B4FD7B9006F0A9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F6D21A1B4FD7B9006F0A9B /* AppDelegate.m */; };
 		B6F6D2211B4FD7B9006F0A9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F6D21F1B4FD7B9006F0A9B /* Main.storyboard */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B68757371B5108F500AB0A3E /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		B68757381B5108F500AB0A3E /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		B6F6D2121B4FD7B9006F0A9B /* DataSetViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSetViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F6D2161B4FD7B9006F0A9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6F6D2171B4FD7B9006F0A9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 			children = (
 				B6F6D2671B4FF21C006F0A9B /* CHCSVParser */,
 				B6F6D24A1B4FDA3C006F0A9B /* AFNetworking */,
+				B68757371B5108F500AB0A3E /* NSString+Utils.h */,
+				B68757381B5108F500AB0A3E /* NSString+Utils.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				B6F6D23F1B4FD80E006F0A9B /* DSVTableViewController.m in Sources */,
 				B6F6D26D1B4FFC52006F0A9B /* DSVDataSet.m in Sources */,
 				B6F6D25F1B4FDA3C006F0A9B /* AFHTTPRequestOperationManager.m in Sources */,
+				B68757391B5108F500AB0A3E /* NSString+Utils.m in Sources */,
 				B6F6D26A1B4FF21C006F0A9B /* CHCSVParser.m in Sources */,
 				B6F6D2621B4FDA3C006F0A9B /* AFSecurityPolicy.m in Sources */,
 				B6F6D2651B4FDA3C006F0A9B /* AFURLResponseSerialization.m in Sources */,
