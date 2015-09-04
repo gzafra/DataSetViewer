@@ -12,7 +12,7 @@
 #import "Reachability.h"
 #import "DSVDataParsingOptions.h"
 
-#define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=0Aqg9JQbnOwBwdEZFN2JKeldGZGFzUWVrNDBsczZxLUE&single=true&gid=0&output=csv"
+#define kBaseUrl @"https://docs.google.com/spreadsheet/ccc?key=13gEAP1RIpspYY8qNRmS3W3ffdNrb-fueB-qjc2asRpo&single=true&gid=0&output=csv"
 #define kCacheDurationInMinutes 60
 #define kKeyLastUpdate @"lastUpdate"
 #define kKeyStoredData @"storedData"
@@ -112,10 +112,7 @@ typedef enum : NSUInteger {
 - (void)parseCSVDataFromString:(NSString*)csvString{
     NSArray *array = [csvString CSVComponents];
     
-    NSArray *auxData = [NSArray arrayWithArray:self.dataCache];
     [self.dataCache removeAllObjects];
-    
-    BOOL shouldLoadCachedImages = (self.cacheMode >= DSVDataManagerCacheOnlyImages && [self shouldLoadFromCache]) ? YES : NO;
     
     NSUInteger idx = 0;
     NSUInteger imagesNotFromCache = 0;
@@ -125,23 +122,7 @@ typedef enum : NSUInteger {
                 DSVDataSet *dataSet = [[DSVDataSet alloc] initWithTitle:[row objectAtIndex:0]
                                                                imageUrl:[row objectAtIndex:2]
                                                             description:[row objectAtIndex:1]];
-                
-                if (shouldLoadCachedImages) {
-                    // Look for image in cache
-                    for (DSVDataSet *oldData in auxData) {
-                        if ([dataSet isEqual:oldData]) {
-                            dataSet.image = oldData.image;
-                            break;
-                        }
-                    }
-                }
-                
-                // Image not found in cache
-                if (!dataSet.image) {
-                    imagesNotFromCache++;
-                    // Load image asynchronously
-                    [self loadImageWithURL:dataSet.imageUrl sender:dataSet];
-                }
+
                 
                 
                 [self.dataCache addObject:dataSet];
@@ -164,24 +145,7 @@ typedef enum : NSUInteger {
     return self.dataCache;
 }
 
-- (void)loadImageWithURL:(NSString*)imageUrl sender:(DSVDataSet*)sender{
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
-    [urlRequest setCachePolicy: NSURLRequestReturnCacheDataElseLoad];
-    
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-    
-    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-    
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        sender.image = responseObject;
-        [self.delegate imageLoadedForDataSet:sender];
-        self.imagesToLoad--;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error loading image with URL: %@",imageUrl);
-        self.imagesToLoad--;
-    }];
-    [requestOperation start];
-}
+
 
 - (BOOL)shouldLoadFromCache{
     NSCalendar *c = [NSCalendar currentCalendar];

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DSVDataManager.h"
 
-@interface DSVTableViewController : UITableViewController <DSVDataManagerDelegate>
+@interface DSVTableViewController : UITableViewController <DSVDataManagerDelegate, UIScrollViewDelegate>
 
 @end

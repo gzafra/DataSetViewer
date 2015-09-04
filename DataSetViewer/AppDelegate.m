@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <AdSupport/ASIdentifierManager.h>
 
 @interface AppDelegate ()
 
@@ -17,7 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
+
+    NSString *idfaString = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+                            
+    NSLog(@"IDFA: %@",idfaString);
+                            
     return YES;
 }
 

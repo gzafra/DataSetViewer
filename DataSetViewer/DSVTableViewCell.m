@@ -20,8 +20,7 @@
 {
     self = [super initWithCoder:aDecoder];
     
-    if(self)
-    {
+    if(self){
         CGFloat leftOffset = kHorizontalOffset * 2 + kImageSize;
         self.myTextLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftOffset,
                                                                       5,
@@ -31,6 +30,8 @@
         self.myTextLabel.font = [UIFont fontWithName:font.fontName size:14.0f];
         self.myTextLabel.numberOfLines = 3;
         [self addSubview:self.myTextLabel];
+        
+        self.myCellId = [self newUUID];
     }
     
     return self;
@@ -57,6 +58,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+                         
+- (NSString *)newUUID
+{
+    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    return (__bridge_transfer NSString *)uuidStringRef;
 }
 
 @end
