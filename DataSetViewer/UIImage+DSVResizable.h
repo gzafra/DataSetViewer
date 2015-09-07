@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (Resizable)
+@interface UIImage (DSVResizable)
 
 - (UIImage*)imageScaledToSize:(CGSize)newSize;
 

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSVTableViewCell.h"
+#import <UIKit/UIImage.h>
+#import "DSVImageLoaderDelegate.h"
 
 typedef enum : NSUInteger {
     DSVImageLoaderStateNotLoaded,
@@ -18,9 +19,10 @@ typedef enum : NSUInteger {
 @interface DSVImageLoader : NSObject
 
 @property (nonatomic, assign) DSVImageLoaderStateType state;
+@property (nonatomic, strong) UIImage *cachedImage;
 
 - (instancetype)initWithUrl:(NSURL*)imageUrl;
-- (void)loadImageForSender:(DSVTableViewCell*)sender;
+- (void)loadImageForSender:(id<DSVImageLoaderDelegate>)sender;
 - (void)cancelRequest;
 
 @end

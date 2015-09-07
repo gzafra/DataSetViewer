@@ -1,5 +1,5 @@
 //
-//  NSString+Utils.h
+//  NSString+DSVUtils.h
 //  DataSetViewer
 //
 //  Created by Guillermo Zafra on 11/07/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Utils)
+@interface NSString (DSVUtils)
 
 @property (nonatomic, readonly) NSString *stringByRemovingHtmlTags;
 @property (nonatomic, readonly) NSString *stringByRemovingQuotes;

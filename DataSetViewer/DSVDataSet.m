@@ -7,7 +7,7 @@
 //
 
 #import "DSVDataSet.h"
-#import "NSString+Utils.h"
+#import "NSString+DSVUtils.h"
 
 
 @implementation DSVDataSet

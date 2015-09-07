@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSVDataSet.h"
+#import "DSVImageLoaderDelegate.h"
 
-@interface DSVDetailViewController : UIViewController
+@interface DSVDetailViewController : UIViewController <DSVImageLoaderDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UITextView *textView;
 
-@property (nonatomic, strong) NSString *titleDetail;
-@property (nonatomic, strong) NSString *descriptionDetail;
-@property (nonatomic, strong) UIImage *imageDetail;
+@property (nonatomic, weak) DSVDataSet *dataset;
 
 @end

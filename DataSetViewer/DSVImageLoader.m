@@ -24,7 +24,7 @@
     return self;
 }
 
-- (void)loadImageForSender:(DSVTableViewCell*)sender{
+- (void)loadImageForSender:(id<DSVImageLoaderDelegate>)sender{
     if (self.state == DSVImageLoaderStateNotLoaded) {
         self.state = DSVImageLoaderStateLoading;
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:self.imageUrl];
@@ -36,12 +36,15 @@
         
         self.requestOperation = requestOperation;
         
+        
+        __weak typeof(self) weakSelf = self;
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [sender updateWithImage:(UIImage*)responseObject];
-            self.state = DSVImageLoaderStateLoaded;
+            weakSelf.state = DSVImageLoaderStateLoaded;
+            weakSelf.cachedImage = (UIImage*)responseObject;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error loading image with URL: %@",self.imageUrl);
-            self.state = DSVImageLoaderStateNotLoaded;
+            weakSelf.state = DSVImageLoaderStateNotLoaded;
         }];
         [requestOperation start];
     }

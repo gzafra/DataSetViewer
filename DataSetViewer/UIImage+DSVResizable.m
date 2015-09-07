@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Guillermo Zafra. All rights reserved.
 //
 
-#import "UIImage+Resizable.h"
+#import "UIImage+DSVResizable.h"
 
-@implementation UIImage (Resizable)
+@implementation UIImage (DSVResizable)
 
 - (UIImage*)imageScaledToSize:(CGSize)newSize{
     UIGraphicsBeginImageContext( newSize );

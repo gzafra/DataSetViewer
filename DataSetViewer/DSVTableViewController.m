@@ -165,8 +165,8 @@
     cell.myTextLabel.text = dataSet.title;
     
     // Update image if already loaded in the model object
-    if (dataSet.image) {
-       [cell updateWithImage:dataSet.image];
+    if (dataSet.imageLoader.cachedImage) {
+       [cell updateWithImage:dataSet.imageLoader.cachedImage];
     }else{
         [cell updateWithImage:[UIImage imageNamed:@"default.png"]];
     }
@@ -245,10 +245,7 @@
         DSVDetailViewController *detailViewController = [segue destinationViewController];
         DSVDataSet *data = [self.dataSource objectAtIndex:selectedRowIndex.row];
         
-        detailViewController.titleDetail = data.title;
-        detailViewController.imageDetail = (UIImage*)data.image;
-        detailViewController.descriptionDetail = data.additionalDescription;
-        
+        detailViewController.dataset = data;
     }
 }
 

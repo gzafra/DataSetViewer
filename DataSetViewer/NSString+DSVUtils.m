@@ -1,14 +1,14 @@
 //
-//  NSString+Utils.m
+//  NSString+DSVUtils.m
 //  DataSetViewer
 //
 //  Created by Guillermo Zafra on 11/07/15.
 //  Copyright (c) 2015 Guillermo Zafra. All rights reserved.
 //
 
-#import "NSString+Utils.h"
+#import "NSString+DSVUtils.h"
 
-@implementation NSString (Utils)
+@implementation NSString (DSVUtils)
 
 - (NSString*)stringByRemovingHtmlTags{
     NSRange r;

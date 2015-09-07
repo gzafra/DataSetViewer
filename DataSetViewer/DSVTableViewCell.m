@@ -8,11 +8,11 @@
 
 #import "DSVTableViewCell.h"
 #import "AFNetworking.h"
-#import "UIImage+Resizable.h"
+#import "UIImage+DSVResizable.h"
+#import "GlobalDefinitions.h"
 
 #define kHorizontalOffset 10.0f
 #define kVerticalOffset 4.0f
-#define kImageSize 64.0f
 
 @implementation DSVTableViewCell
 
@@ -21,7 +21,7 @@
     self = [super initWithCoder:aDecoder];
     
     if(self){
-        CGFloat leftOffset = kHorizontalOffset * 2 + kImageSize;
+        CGFloat leftOffset = kHorizontalOffset * 2 + kThumbnailImageSize;
         self.myTextLabel = [[UILabel alloc] initWithFrame: CGRectMake(leftOffset,
                                                                       5,
                                                                       self.frame.size.width - leftOffset - kHorizontalOffset,
@@ -43,14 +43,14 @@
 }
 
 - (void)updateWithImage:(UIImage*)image{
-    if (MAX(image.size.width, image.size.height) > kImageSize) {
-        [self.myImageView setImage:[image imageScaledToSize:CGSizeMake(kImageSize, kImageSize)]];
+    if (MAX(image.size.width, image.size.height) > kThumbnailImageSize) {
+        [self.myImageView setImage:[image imageScaledToSize:CGSizeMake(kThumbnailImageSize, kThumbnailImageSize)]];
     }else{
         [self.myImageView setImage:image];
     }
     [self.myImageView setImage:image];
-    self.myImageView.frame = CGRectMake(kHorizontalOffset, 0, kImageSize, kImageSize);
-    self.myImageView.center = CGPointMake(kHorizontalOffset + kImageSize/2, self.frame.size.height/2);
+    self.myImageView.frame = CGRectMake(kHorizontalOffset, 0, kThumbnailImageSize, kThumbnailImageSize);
+    self.myImageView.center = CGPointMake(kHorizontalOffset + kThumbnailImageSize/2, self.frame.size.height/2);
     self.myImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 

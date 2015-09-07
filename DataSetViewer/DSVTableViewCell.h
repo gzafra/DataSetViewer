@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DSVImageLoaderDelegate.h"
 
-@interface DSVTableViewCell : UITableViewCell
+@interface DSVTableViewCell : UITableViewCell <DSVImageLoaderDelegate>
 
 @property (nonatomic, strong) UILabel *myTextLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *myImageView;
 @property (nonatomic, strong) NSString *myCellId;
 
-- (void)updateWithImage:(UIImage*)image;
+
 
 @end

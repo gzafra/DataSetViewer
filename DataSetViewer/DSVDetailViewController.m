@@ -7,6 +7,8 @@
 //
 
 #import "DSVDetailViewController.h"
+#import "GlobalDefinitions.h"
+#import "UIImage+DSVResizable.h"
 
 @interface DSVDetailViewController ()
 
@@ -17,21 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.titleLabel.text = self.titleDetail;
-    if (self.imageDetail) {
-        self.imageView.image = self.imageDetail;
+    self.titleLabel.text = self.dataset.title;
+    if (self.dataset.imageLoader.cachedImage) {
+        self.imageView.image = self.dataset.imageLoader.cachedImage;
     }else{
         NSString *path = [[NSBundle mainBundle] pathForResource:@"default" ofType:@"png"];
         [self.imageView setImage:[UIImage imageWithContentsOfFile:path]];
+        [self.dataset.imageLoader loadImageForSender:self];
     }
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    self.textView.text = self.descriptionDetail;
+    self.textView.text = self.dataset.additionalDescription;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateWithImage:(UIImage*)image{
+    // TODO: Re-scale or whatever we want for the detail imageView
+    [self.imageView setImage:image];
 }
 
 /*

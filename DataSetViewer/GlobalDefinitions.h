@@ -13,4 +13,6 @@
 #warning TODO: Lines and Components Mode for parsing CSV
 #warning TODO: Error view must be relative
 
+#define kThumbnailImageSize 64.0f
+
 #endif

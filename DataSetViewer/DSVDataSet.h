@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIImage.h>
 #import "DSVImageLoader.h"
 
 @interface DSVDataSet : NSObject
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *additionalDescription;
-@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *imageUrl;
 @property (nonatomic, strong) DSVImageLoader *imageLoader;
 
