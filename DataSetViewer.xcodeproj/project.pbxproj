@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B638B0C81B99D48000F53491 /* DSVImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B638B0C71B99D48000F53491 /* DSVImageLoader.m */; };
 		B68757391B5108F500AB0A3E /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B68757381B5108F500AB0A3E /* NSString+Utils.m */; };
 		B687573C1B51213700AB0A3E /* DSVDataParsingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B687573B1B51213700AB0A3E /* DSVDataParsingOptions.m */; };
 		B687573F1B51AC2C00AB0A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B687573E1B51AC2C00AB0A3E /* Localizable.strings */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B638B0C61B99D48000F53491 /* DSVImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVImageLoader.h; sourceTree = "<group>"; };
+		B638B0C71B99D48000F53491 /* DSVImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSVImageLoader.m; sourceTree = "<group>"; };
 		B68757371B5108F500AB0A3E /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		B68757381B5108F500AB0A3E /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		B687573A1B51213700AB0A3E /* DSVDataParsingOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSVDataParsingOptions.h; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 			children = (
 				B6F6D2461B4FD98B006F0A9B /* DSVDataManager.h */,
 				B6F6D2471B4FD98B006F0A9B /* DSVDataManager.m */,
+				B638B0C61B99D48000F53491 /* DSVImageLoader.h */,
+				B638B0C71B99D48000F53491 /* DSVImageLoader.m */,
 				B6F6D26B1B4FFC52006F0A9B /* DSVDataSet.h */,
 				B6F6D26C1B4FFC52006F0A9B /* DSVDataSet.m */,
 				B687573A1B51213700AB0A3E /* DSVDataParsingOptions.h */,
@@ -383,6 +388,7 @@
 				B6F6D2661B4FDA3C006F0A9B /* AFURLSessionManager.m in Sources */,
 				B6F6D21B1B4FD7B9006F0A9B /* AppDelegate.m in Sources */,
 				B6F6D2721B50200D006F0A9B /* DSVTableViewCell.m in Sources */,
+				B638B0C81B99D48000F53491 /* DSVImageLoader.m in Sources */,
 				B6F6D2611B4FDA3C006F0A9B /* AFNetworkReachabilityManager.m in Sources */,
 				B6F6D2451B4FD952006F0A9B /* DSVNavigationViewController.m in Sources */,
 				B687574E1B51D97300AB0A3E /* UIImage+Resizable.m in Sources */,

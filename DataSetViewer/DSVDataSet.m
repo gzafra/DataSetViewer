@@ -14,9 +14,10 @@
 
 - (instancetype)initWithTitle:(NSString*)title imageUrl:(NSString*)url description:(NSString*)description{
     if (self = [super init]) {
-        self.title = title;
-        _imageUrl = url;
-        self.additionalDescription = description;
+        _title = title;
+        _imageUrl = [NSURL URLWithString:url];
+        _additionalDescription = description;
+        _imageLoader = [[DSVImageLoader alloc] initWithUrl:self.imageUrl];
     }
     return self;
 }
@@ -42,12 +43,6 @@
     }
 }
 
-- (void)setImage:(NSData *)image{
-    if (_image != image) {
-        _image = image;
-    }
-}
-
 #pragma mark - Serialization
 
 -(void)encodeWithCoder:(NSCoder *)encoder{
@@ -55,7 +50,7 @@
     [encoder encodeObject:self.title forKey:@"title"];
     [encoder encodeObject:self.imageUrl forKey:@"imageUrl"];
     [encoder encodeObject:self.additionalDescription forKey:@"description"];
-    [encoder encodeObject:self.image forKey:@"image"];
+//    [encoder encodeObject:UIImageJPEGRepresentation(self.image)  forKey:@"image"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
@@ -65,7 +60,7 @@
         self.title = [decoder decodeObjectForKey:@"title"];
         self.imageUrl = [decoder decodeObjectForKey:@"imagleUrl"];
         self.additionalDescription = [decoder decodeObjectForKey:@"description"];
-        self.image = [decoder decodeObjectForKey:@"image"];
+//        self.image = [decoder decodeObjectForKey:@"image"];
     }
     return self;
 }

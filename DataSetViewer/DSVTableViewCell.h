@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UILabel *myTextLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *myImageView;
+@property (nonatomic, strong) NSString *myCellId;
 
 - (void)updateWithImage:(UIImage*)image;
 

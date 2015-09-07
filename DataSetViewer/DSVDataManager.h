@@ -23,7 +23,7 @@
 + (instancetype)sharedManager;
 
 - (void)loadRemoteData;
-- (void)loadImageWithURL:(NSString*)imageUrl sender:(DSVDataSet*)sender;
+
 
 @property (nonatomic, readonly) NSArray *remoteData;
 @property (nonatomic, weak) id<DSVDataManagerDelegate> delegate;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BF869409-1C27-440F-90DF-C063C7934A19</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DataSetViewer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3E7FB94496ACF172D8376A52FEA04939416FE71F</key>
+		<string>https://bitbucket.org/nilart/datasetviewer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DataSetViewer.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3E7FB94496ACF172D8376A52FEA04939416FE71F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/nilart/datasetviewer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3E7FB94496ACF172D8376A52FEA04939416FE71F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3E7FB94496ACF172D8376A52FEA04939416FE71F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DataSetViewer</string>
+		</dict>
+	</array>
+</dict>
+</plist>

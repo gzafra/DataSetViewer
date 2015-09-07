@@ -132,6 +132,16 @@
     });
 }
 
+- (void)loadImagesForVisibleCells{
+    NSArray *cells = [self.tableView visibleCells];
+    
+    for (DSVTableViewCell *cell in cells) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        DSVDataSet *dataSet = [self.dataSource objectAtIndex:indexPath.row];
+        [dataSet.imageLoader loadImageForSender:cell];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -156,11 +166,15 @@
     
     // Update image if already loaded in the model object
     if (dataSet.image) {
-       [cell updateWithImage:(UIImage*)dataSet.image];
+       [cell updateWithImage:dataSet.image];
     }else{
         [cell updateWithImage:[UIImage imageNamed:@"default.png"]];
     }
     
+    if (!tableView.dragging) {
+        DSVDataSet *dataSet = [self.dataSource objectAtIndex:indexPath.row];
+        [dataSet.imageLoader loadImageForSender:(DSVTableViewCell*)cell];
+    }
     
     return cell;
 }
@@ -175,6 +189,26 @@
     [self performSegueWithIdentifier:@"ShowDetails" sender:self];
 }
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+    DSVDataSet *dataSet = [self.dataSource objectAtIndex:indexPath.row];
+    [dataSet.imageLoader cancelRequest];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self scrollingFinish];
+    }
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self scrollingFinish];
+}
+- (void)scrollingFinish {
+    [self loadImagesForVisibleCells];
+}
 
 #pragma mark - DSVDataManagerDelegate
 
@@ -184,19 +218,6 @@
     
     self.dataSource = dataLoaded;
     [self.tableView reloadData];
-}
-
-- (void)imageLoadedForDataSet:(DSVDataSet*)dataSet{
-    // Update images from cells that are visible
-    
-    NSArray *cells = [self.tableView visibleCells];
-    NSUInteger dsIndex = [self.dataSource indexOfObject:dataSet];
-    for (DSVTableViewCell *cell in cells) {
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        if (dsIndex == indexPath.row) {
-            [cell updateWithImage:(UIImage*)dataSet.image];
-        }
-    }
 }
 
 - (void)dataFailedToLoad{
