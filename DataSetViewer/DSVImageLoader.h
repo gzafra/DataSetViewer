@@ -20,9 +20,11 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) DSVImageLoaderStateType state;
 @property (nonatomic, strong) UIImage *cachedImage;
+@property (nonatomic, readonly) NSData *imageData;
 
 - (instancetype)initWithUrl:(NSURL*)imageUrl;
 - (void)loadImageForSender:(id<DSVImageLoaderDelegate>)sender;
 - (void)cancelRequest;
++ (DSVImageLoader*)imageLoaderWithData:(NSData*)imageData;
 
 @end

@@ -24,6 +24,18 @@
     return self;
 }
 
+- (instancetype)initWithImageData:(NSData*)imageData{
+    if (self = [super init]) {
+        _cachedImage = (UIImage*)imageData;
+    }
+    return self;
+}
+
++ (DSVImageLoader*)imageLoaderWithData:(NSData*)imageData{
+    DSVImageLoader *imageLoader = [[DSVImageLoader alloc]initWithImageData:imageData];
+    return imageLoader;
+}
+
 - (void)loadImageForSender:(id<DSVImageLoaderDelegate>)sender{
     if (self.state == DSVImageLoaderStateNotLoaded) {
         self.state = DSVImageLoaderStateLoading;
@@ -55,6 +67,12 @@
         [self.requestOperation cancel];
         self.requestOperation = nil;
     }
+}
+
+#pragma mark - Properties
+
+- (NSData*)imageData{
+    return UIImageJPEGRepresentation(self.cachedImage, 1.0f);
 }
 
 @end

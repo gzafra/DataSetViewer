@@ -16,6 +16,7 @@
 #define kCacheDurationInMinutes 60
 #define kKeyLastUpdate @"lastUpdate"
 #define kKeyStoredData @"storedData"
+#define kDataFile @"storedData"
 
 typedef enum : NSUInteger {
     DSVDataManagerCacheNone = 0,
@@ -56,7 +57,6 @@ typedef enum : NSUInteger {
 
 - (instancetype)init{
     if (self = [super init]) {
-        _dataCache = [NSMutableArray new];
         _cacheMode = DSVDataManagerCacheOnlyImages; // Default cache mode
         
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
@@ -115,7 +115,6 @@ typedef enum : NSUInteger {
     [self.dataCache removeAllObjects];
     
     NSUInteger idx = 0;
-    NSUInteger imagesNotFromCache = 0;
     for (NSArray *row in array) {
         if (idx > 0) {
             if (row.count == 3) {
@@ -132,13 +131,8 @@ typedef enum : NSUInteger {
         }
         idx++;
     }
-    
-    if (imagesNotFromCache > 0) {
-        self.imagesToLoad = imagesNotFromCache;
-    }else{
-        // Everything already loaded, save data
-        [self saveData];
-    }
+
+    [self saveData];
 }
 
 - (NSArray*)remoteData{
@@ -177,16 +171,25 @@ typedef enum : NSUInteger {
 }
 
 - (void)saveData{
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.dataCache];
-    [prefs setObject:myEncodedObject forKey:kKeyStoredData];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    BOOL result = [NSKeyedArchiver archiveRootObject:self.dataCache toFile:[self filePath]];
+    if (!result) {
+        NSLog(@"fuck");
+    }
 }
 
 -(void)loadData{
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSArray *loadedData = (NSArray*)[NSKeyedUnarchiver unarchiveObjectWithData:[prefs objectForKey:kKeyStoredData]];
-    self.dataCache = [NSMutableArray arrayWithArray:loadedData];
+    self.dataCache = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePath]];
+    if (!self.dataCache) {
+        self.dataCache = [NSMutableArray new];
+    }
+}
+
+- (NSString*)filePath{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *path= [documentsPath stringByAppendingPathComponent:kDataFile];
+    return path;
 }
 
 #pragma mark - Reachability
